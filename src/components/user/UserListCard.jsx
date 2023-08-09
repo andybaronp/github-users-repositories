@@ -22,6 +22,7 @@ const UserListCard = ({ user }) => {
           alt={user.login}
         />
         <div>
+
           <h3 className='text-[10] sm:text-lg'>@{user.login}</h3>
           <div className='flex items-center gap-2 overflow-hidden text-gray-400 cursor-pointer hover:underline'>
             <FaGithub />
@@ -35,7 +36,7 @@ const UserListCard = ({ user }) => {
           </div>
         </div>
       </div>
-      <div>
+      <div className='border-l-[1px] px-2'>
         <Link
           href={`/user/${user.login}`}
           className='p-2 '

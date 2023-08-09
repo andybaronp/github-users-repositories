@@ -64,7 +64,7 @@ const UserList = () => {
   }
   const [searched, setSearched] = useState('')
   // Debounce
-  const debouncedSearch = useDebounce(searched, 1000)
+  const debouncedSearch = useDebounce(searched, 1200)
   useEffect(() => {
     if (debouncedSearch === '') {
       async function fetchData() {
@@ -98,10 +98,10 @@ const UserList = () => {
     <div className='flex flex-col '>
       <Toaster position='top-right' duration={1200} />
       <input
-        className='w-7/12 px-3 py-1 pl-3 mx-auto mb-3 text-black outline-none rounded-xl sm:ml-7'
+        className='w-7/12 px-3 py-1 pl-3 mx-auto mb-3 text-black outline-none rounded-xl '
         onChange={(e) => setSearched(e.target.value)}
         type='text'
-        placeholder='Filtrar por nombre'
+        placeholder='Buscar por usuario'
         value={searched}
       />
       <InfiniteScroll
@@ -109,7 +109,7 @@ const UserList = () => {
         hasMore={!isSearch}
         next={() => getMoreUsers(nextPage)}
         loader={<Spinner />}
-        className='flex flex-col justify-between gap-4 mt-3 '
+        className='grid justify-between gap-4 mt-3 '
       >
         {userList.map((user, i) => (
           <UserListCard user={user} key={i} />

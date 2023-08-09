@@ -8,9 +8,11 @@ const Navbar = () => {
       <Link href='/'>
         <FaGithub size='2rem' />
       </Link>
-      <h1 className='text-2xl font-semibold '>GITHUB USERS</h1>
+      <Link href='/'>
+        <h1 className='hidden text-2xl font-semibold sm:block'>GITHUB USERS</h1>
+      </Link>
       <Link href={'/favorites'}>
-        <p color='white'>Favoritos</p>
+        <p color='white'>Repositorios Favoritos</p>
       </Link>
     </div>
   )
