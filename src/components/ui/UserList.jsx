@@ -5,7 +5,7 @@ import { useDebounce } from '@/hooks/useDebounce'
 import { Toaster, toast } from 'sonner'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Spinner from './Spinner'
-import UserCard from './UserCard'
+import UserListCard from './UserListCard'
 
 const UserList = () => {
   const [userList, setUserList] = useState([])
@@ -88,7 +88,7 @@ const UserList = () => {
         className='flex flex-col justify-between gap-4 mt-3 '
       >
         {userList.map((user, i) => (
-          <UserCard user={user} key={i} />
+          <UserListCard user={user} key={i} />
         ))}
       </InfiniteScroll>
     </div>
