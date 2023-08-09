@@ -1,34 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Github User/Repositories
 
-## Getting Started
+## 👉🏻 [Deploy](http://https://github-users-repositories.vercel.app/ 'Deploy')
 
-First, run the development server:
+## 📂[Repositorio](https://github.com/andybaronp/github-users-repositories 'Repositorio')
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## 📝 Comenzar
+
+```
+- git clone git@github.com:andybaronp/github-users-repositories.git
+- git clone https://github.com/andybaronp/github-users-repositories.git
+- cd github-users-repositories
+- npm install
+- Agregar variable de entorno (ver .env.templete)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- Listado de ususarios con scroll infinito
+- Busqueda de usaurio por nombre (solo lista 25)
+- Perfil del usuario con sus detalles y repositorios
+- Detalle del repositorio con funcionalidad de guardar favoritos
+- Listado de favoritos con filtro
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### 📚Depedencias o paquetes usados
 
-## Learn More
+- Estilos con Tailwindcss
+- Toast con sonner
+- Scroll infinito con eact-infinite-scroll-component
+- Nextjs 13.4
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Algunas imagenes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<div style='display: flex; flex-direction: column; gap: 10px'>
+<img src='https://i.imgur.com/wVnH8he.png' style="width:500px;" >
+<img src='https://imgur.com/sKC2rOq.png' style="width:500px;" >
+<img src='https://imgur.com/s4pc476.png' style="width:500px;" >
+<img src='https://imgur.com/PpcPTWb.png' style="width:500px;" >
+</div>
