@@ -36,7 +36,6 @@ const UserList = () => {
       setUserList(data)
       setNextPage(nextPageSince)
       setLoading(false)
-
     }
     fetchData()
   }, [])
@@ -88,7 +87,9 @@ const UserList = () => {
   if (userList.length === 0 && !loading) {
     return (
       <div className='flex flex-col items-center justify-center gap-10'>
-        <h1 className='text-lg font-semibold text-center'>No data para mostrar</h1>
+        <h1 className='text-lg font-semibold text-center'>
+          No data para mostrar
+        </h1>
         <FaHeartCrack color='red' size={'4rem'} />
       </div>
     )

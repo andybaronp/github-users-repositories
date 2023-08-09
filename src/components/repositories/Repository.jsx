@@ -2,9 +2,7 @@
 
 import Link from 'next/link'
 
-import {
-  FaArrowLeftLong,
-} from 'react-icons/fa6'
+import { FaArrowLeftLong } from 'react-icons/fa6'
 import { Toaster, toast } from 'sonner'
 import RepositoryCard from './RepositoryCard'
 import { localfavorites } from '@/utils'
@@ -25,7 +23,6 @@ const Repository = ({ repo }) => {
     setisFavoriteLocal(isfavorite)
     setLoading(false)
   }, [repo.id])
-  console.log(isFavoriteLocal);
   return (
     <div className='flex flex-col items-center '>
       <Toaster position='top-right' duration={1500} />
@@ -35,7 +32,12 @@ const Repository = ({ repo }) => {
       >
         <FaArrowLeftLong />
       </Link>
-      <RepositoryCard repo={repo} handleFavorite={handleFavorite} isFavoriteLocal={isFavoriteLocal} loading={loading} />
+      <RepositoryCard
+        repo={repo}
+        handleFavorite={handleFavorite}
+        isFavoriteLocal={isFavoriteLocal}
+        loading={loading}
+      />
     </div>
   )
 }

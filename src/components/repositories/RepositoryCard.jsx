@@ -1,13 +1,26 @@
 'use client'
-import { localfavorites } from '@/utils'
 import { formatDate } from '@/utils/formatDate'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import { FaArrowUpLong, FaBugSlash, FaCodeFork, FaEye, FaHeart, FaHouseChimney, FaLanguage, FaLink, FaRegClone, FaRegHeart } from 'react-icons/fa6'
+import {
+  FaArrowUpLong,
+  FaBugSlash,
+  FaCodeFork,
+  FaEye,
+  FaHeart,
+  FaHouseChimney,
+  FaLanguage,
+  FaLink,
+  FaRegClone,
+  FaRegHeart,
+} from 'react-icons/fa6'
 import { Toaster, toast } from 'sonner'
 
-const RepositoryCard = ({ repo, handleFavorite, loading = false, isFavoriteLocal }) => {
-
+const RepositoryCard = ({
+  repo,
+  handleFavorite,
+  loading = false,
+  isFavoriteLocal,
+}) => {
   async function copyTextToClipboard(text) {
     if ('clipboard' in navigator) {
       toast.success('Link copiado al portapapeles')
@@ -18,7 +31,7 @@ const RepositoryCard = ({ repo, handleFavorite, loading = false, isFavoriteLocal
   }
   return (
     <article className='flex  justify-between rounded-xl  bg-[#1e2a47] p-3 sm:py-6 sm:px-4 w-11/12 sm:w-full sm:max-w-[500px] mx-auto '>
-      <Toaster position="top-right" duration={1200} />
+      <Toaster position='top-right' duration={1200} />
 
       <div className='flex flex-col justify-between w-full gap-2 p-3'>
         <div className='flex justify-between w-full'>
@@ -46,7 +59,9 @@ const RepositoryCard = ({ repo, handleFavorite, loading = false, isFavoriteLocal
         </div>
 
         <div className='text-xs text-gray-300 '>{repo.description}</div>
-        <div className='flex items-center gap-1 text-xs sm:text-sm'><FaLanguage /> {repo.language ? repo.language : 'Sin lenguajes'}</div>
+        <div className='flex items-center gap-1 text-xs sm:text-sm'>
+          <FaLanguage /> {repo.language ? repo.language : 'Sin lenguajes'}
+        </div>
         <div className='flex items-center gap-1 text-xs sm:text-sm'>
           <FaArrowUpLong /> {formatDate(repo.updated_at)}
         </div>
@@ -89,10 +104,11 @@ const RepositoryCard = ({ repo, handleFavorite, loading = false, isFavoriteLocal
               <FaHeart color='red' />
             </span>
           ) : (
-            <span className='flex items-center justify-center gap-2'>Guardar en favoritos <FaRegHeart color='white' /></span>
+            <span className='flex items-center justify-center gap-2'>
+              Guardar en favoritos <FaRegHeart color='white' />
+            </span>
           )}{' '}
         </button>
-
       </div>
     </article>
   )

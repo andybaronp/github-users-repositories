@@ -17,8 +17,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
     "react-infinite-scroll-component": "^6.1.0",
-    "sonner": "^0.6.2",
-    "styled-components": "^6.0.7"
+    "sonner": "^0.6.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

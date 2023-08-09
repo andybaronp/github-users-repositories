@@ -17,7 +17,7 @@ const getUserByID = async (id) => {
   return user
 }
 export const metadata = {
-  title: `User`,
+  title: `Perfil de usuario`,
   description: 'Search repositories on Github ',
 }
 
@@ -83,7 +83,9 @@ const page = async ({ params }) => {
                     {`@${user.twitter_username}`}{' '}
                   </Link>
                 ) : (
-                  <span className='text-xs text-gray-300 sm:text-base'>No disponible</span>
+                  <span className='text-xs text-gray-300 sm:text-base'>
+                    No disponible
+                  </span>
                 )}
               </div>
             </div>
@@ -99,7 +101,9 @@ const page = async ({ params }) => {
                     Ir a Web
                   </Link>
                 ) : (
-                  <span className='text-xs text-gray-300 sm:text-base'>No disponible</span>
+                  <span className='text-xs text-gray-300 sm:text-base'>
+                    No disponible
+                  </span>
                 )}
               </div>
               <div className='flex items-center gap-3'>
@@ -113,7 +117,9 @@ const page = async ({ params }) => {
                     {user.company}
                   </Link>
                 ) : (
-                  <span className='text-xs text-gray-300 sm:text-base'>No disponible</span>
+                  <span className='text-xs text-gray-300 sm:text-base'>
+                    No disponible
+                  </span>
                 )}
               </div>
             </div>

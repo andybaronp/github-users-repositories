@@ -35,7 +35,7 @@ const UserListCard = ({ user }) => {
           </div>
         </div>
       </div>
-      <div  >
+      <div>
         <Link
           href={`/user/${user.login}`}
           className='p-2 '

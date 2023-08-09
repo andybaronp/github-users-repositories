@@ -51,7 +51,7 @@ export const getUsers = async (since = 0) => {
  */
 export const getUsersByName = async (name) => {
   try {
-    const response = await getAllDataGet(`https://api.github.com/search/users?q=${name}&per_page=25`)
+    const response = await getAllDataGet(`https://api.github.com/search/users?q=${name}&per_page=15`)
     const pagination = response.headers.get('link')
     const nextPageLink = pagination.split(';')[1].slice(0, -1)
     const indexOfSince = nextPageLink.indexOf('15&page=')

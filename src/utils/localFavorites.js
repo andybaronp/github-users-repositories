@@ -1,6 +1,5 @@
-
 /**
- * 
+ *
  * @param {repo} repositorio a guardar o eliminar
  */
 const tooggleFavorites = (repo) => {
@@ -22,17 +21,13 @@ const tooggleFavorites = (repo) => {
     owner: {
       login: repo.owner.login,
       avatar_url: repo.owner.avatar_url,
-    }
+    },
   }
-
-
 
   let favorites = JSON.parse(localStorage.getItem('reposfavorites') || '[]')
 
   if (favorites.some((someRepo) => someRepo.id === repo.id)) {
-
     favorites = favorites.filter((repository) => repository.id !== repo.id)
-
   } else {
     favorites.push(repository)
   }
