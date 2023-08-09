@@ -92,11 +92,11 @@ const page = async ({ params }) => {
                 <FaLink />
                 {user.blog ? (
                   <Link
-                    className='text-xs text-gray-300 sm:text-base'
+                    className='text-xs text-gray-300 sm:text-base hover:underline'
                     href={user.blog}
                     target='_blank'
                   >
-                    {user.blog}
+                    Ir a Web
                   </Link>
                 ) : (
                   <span className='text-xs text-gray-300 sm:text-base'>No disponible</span>
@@ -120,7 +120,7 @@ const page = async ({ params }) => {
           </section>
         </div>
       </article>
-      <div>
+      <div className='mb-1'>
         <Repositories userRepositories={id} />
       </div>
     </div>
