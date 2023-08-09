@@ -16,8 +16,9 @@
 
 ## ⚙️ Features
 
-- Listado de ususarios con scroll infinito
-- Busqueda de usaurio por nombre (solo lista 25)
+- Listado de usuarios con scroll infinito
+
+- Búsqueda de usuario por nombre (solo lista 25)
 - Perfil del usuario con sus detalles y repositorios
 - Detalle del repositorio con funcionalidad de guardar favoritos
 - Listado de favoritos con filtro
