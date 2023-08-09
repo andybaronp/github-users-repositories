@@ -4,10 +4,12 @@ import { getUsers, getUsersByName } from '@/utils/api'
 import { useDebounce } from '@/hooks/useDebounce'
 import { Toaster, toast } from 'sonner'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import Spinner from './Spinner'
+import Spinner from '../ui/Spinner'
 import UserListCard from './UserListCard'
+import { FaHeartCrack } from 'react-icons/fa6'
 
 const UserList = () => {
+  const [loading, setLoading] = useState(true)
   const [userList, setUserList] = useState([])
   const [nextPage, setNextPage] = useState(0)
   const [isSearch, setIsSearch] = useState(false)
@@ -21,6 +23,7 @@ const UserList = () => {
   // primera carga de datos
   useEffect(() => {
     async function fetchData() {
+      setLoading(true)
       const { data, nextPageSince, error } = await getUsers(0)
       if (data.length === 0) {
         toast('No se encontraron resultados')
@@ -32,24 +35,32 @@ const UserList = () => {
       }
       setUserList(data)
       setNextPage(nextPageSince)
+      setLoading(false)
+
     }
     fetchData()
   }, [])
 
   const userByName = async (name) => {
+    setLoading(true)
     const { data, error } = await getUsersByName(name)
     if (data.length === 0) {
       toast('No se encontraron resultados')
       setIsSearch(false)
+      setLoading(false)
+
       return
     }
     if (error) {
       toast.error('Error al consultar')
+      setLoading(false)
+
       return
     }
     if (data.length > 0) {
       setUserList(data)
       setIsSearch(true)
+      setLoading(false)
     }
   }
   const [searched, setSearched] = useState('')
@@ -70,6 +81,18 @@ const UserList = () => {
     userByName(debouncedSearch)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch])
+
+  if (loading) {
+    return <Spinner />
+  }
+  if (userList.length === 0 && !loading) {
+    return (
+      <div className='flex flex-col items-center justify-center gap-10'>
+        <h1 className='text-lg font-semibold text-center'>No data para mostrar</h1>
+        <FaHeartCrack color='red' size={'4rem'} />
+      </div>
+    )
+  }
   return (
     <div className='flex flex-col '>
       <Toaster position='top-right' duration={1200} />

@@ -4,7 +4,6 @@ const page = () => {
 
   return (
     <div>
-      Listado de favoritos
       <Favorites />
     </div>
   )

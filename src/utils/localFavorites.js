@@ -11,11 +11,21 @@ const tooggleFavorites = (repo) => {
     url: repo.html_url,
     created_at: repo.created_at,
     language: repo.language,
+    homepage: repo.homepage,
+    watchers: repo.watchers,
+    open_issues: repo.open_issues,
+    forks: repo.forks,
+    clone_url: repo.clone_url,
+    html_url: repo.html_url,
+    created_at: repo.created_at,
+    updated_at: repo.updated_at,
     owner: {
       login: repo.owner.login,
       avatar_url: repo.owner.avatar_url,
     }
   }
+
+
 
   let favorites = JSON.parse(localStorage.getItem('reposfavorites') || '[]')
 

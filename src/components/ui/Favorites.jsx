@@ -1,16 +1,17 @@
 "use client"
 import { useDebounce } from '@/hooks/useDebounce'
 import { localfavorites } from '@/utils'
-import Image from 'next/image'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+import { Toaster, toast } from 'sonner'
+import { FaHeartCrack } from 'react-icons/fa6'
+import Spinner from './Spinner'
+import RepositoryCard from '../repositories/RepositoryCard'
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([])
   const [isFavoriteLocal, setisFavoriteLocal] = useState()
   const [loading, setLoading] = useState(true)
   const [searched, setSearched] = useState('')
-
   // carga de favoritos de localStorage
   useEffect(() => {
     setFavorites(localfavorites.favoriteRepositories())
@@ -22,7 +23,15 @@ const Favorites = () => {
     const isfavorite = localfavorites.existInFavorites(repo.id)
     setisFavoriteLocal(isfavorite)
   }
-
+  // carga de favoritos de localStorage
+  useEffect(() => {
+    favorites.map(repo => {
+      const isfavorite = localfavorites.existInFavorites(repo.id)
+      setisFavoriteLocal(isfavorite)
+      setLoading(false)
+    }
+    )
+  }, [favorites])
 
   // Filtrado de favoritos
   const requestSearch = (value) => {
@@ -32,15 +41,19 @@ const Favorites = () => {
           ?.toLowerCase()
           .match(new RegExp(String(value.toLowerCase()), 'g'))
       })
-      setFavorites(filteredRows)
-      setSearched(value)
+      if (filteredRows.length !== 0) {
+        setFavorites(filteredRows)
+      } else {
+        toast.error('No se encontraron resultados')
+
+      }
     } else {
       setFavorites(localfavorites.favoriteRepositories())
       setSearched('')
     }
   }
   // Debounce
-  const debouncedSearch = useDebounce(searched, 500);
+  const debouncedSearch = useDebounce(searched, 1000);
   useEffect(() => {
     requestSearch(debouncedSearch)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -48,37 +61,33 @@ const Favorites = () => {
 
 
   return (
-    <div>
-      <Link href='/'>
-        a
-      </Link>
+    <div className='flex flex-col '>
+      <Toaster position="top-right" duration={1200} />
+
       {
-        loading ? <p>Cargando...</p> :
+        loading ?
+          <div className='flex flex-col items-center justify-center w-full'>
+            <Spinner />
+          </div>
+          :
           favorites.length === 0 ? (
-            " <NoFavorites />"
+            <div className='flex flex-col items-center justify-center gap-10'>
+              <h1 className='text-lg font-semibold text-center'>No hay favoritos</h1>
+              <FaHeartCrack color='red' size={'4rem'} />
+            </div>
           ) : (
-            <div>
-              <input onChange={(e) => setSearched(e.target.value)} type="text" placeholder='Filtrar por nombre' value={searched} />
-              <ul>
-                {favorites.map((repo) => (
-                  <li key={repo.id} style={{ display: 'flex', gap: '1rem', alignItems: 'center', border: '1px solid #ccc', padding: '1rem', margin: '1rem 0' }}>
-                    <div key={repo.id} style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '10px', display: 'flex', flexDirection: 'column', gap: '10px' }} >
-                      <Image src={repo.owner.avatar_url} alt={repo.owner.login} width={100} height={100} priority />
-                      <div>ID: {repo.id}</div>
-                      <div>Name: {repo.name} </div>
-                      <div>description: {repo.description}</div>
-                      <div>created_at: {repo.created_at}</div>
-                      <div>language: {repo.language}</div>
-                      <Link href={`/user/${repo.owner.login}/repository/${repo.name}`}>
-                        Ir a detalles
-                      </Link>
+            <div className='flex flex-col items-center justify-between gap-4 ' >
+              <input
+                className='w-7/12 px-3 py-1 pl-3 mx-auto mb-3 text-black outline-none sm:w-72 rounded-xl '
+                onChange={(e) => setSearched(e.target.value)} type="text" placeholder='Filtrar por nombre' value={searched} />
 
-                    </div>
-                    <button onClick={() => handleFavorite(repo)}>    Quitar de favoritos </button>
+              {favorites.map((repo) => (
 
-                  </li>
-                ))}
-              </ul>
+                <RepositoryCard key={repo.id} repo={repo} handleFavorite={handleFavorite} loading={loading} isFavoriteLocal={isFavoriteLocal}
+                />
+
+              ))}
+
 
             </div>
           )}

@@ -1,10 +1,12 @@
-import UserList from "@/components/UserList";
+import Favorites from "@/components/ui/Favorites";
+import UserList from "@/components/user/UserList";
 
 
 export default function Home() {
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', width: '100%', }}>
+    <div className="flex justify-around ">
+
       <UserList />
     </div>
   )

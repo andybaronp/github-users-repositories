@@ -1,5 +1,5 @@
 import './globals.css'
-import { Inter, Space_Mono } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import Navbar from '@/components/ui/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -15,14 +15,8 @@ export default function RootLayout({ children }) {
 
     <html lang="es">
       <body className={inter.className}>
-
         <Navbar />
-
-        <main
-          style={{
-            padding: '0 20px',
-          }}
-        >
+        <main className='max-w-6xl mx-auto mt-28' >
           {children}
         </main>
 
