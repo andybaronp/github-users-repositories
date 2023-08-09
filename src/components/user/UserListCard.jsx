@@ -10,7 +10,7 @@ const UserListCard = ({ user }) => {
   return (
     <div
       key={user.id}
-      className='bg-[#1e2a47]  flex  gap-3  py-2 px-4 border border-gray-500 rounded-[100px] items-center  sm:w-[450px] w-11/12 mx-auto sm:mx-0  justify-between '
+      className='bg-[#1e2a47]  flex  gap-3  py-2 px-3 border border-gray-500 rounded-[100px] items-center  sm:w-[430px] w-11/12 mx-auto sm:mx-0  justify-between '
     >
       <div className='flex items-center justify-between gap-2 '>
         <Image

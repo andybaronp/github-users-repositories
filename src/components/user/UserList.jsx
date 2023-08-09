@@ -109,7 +109,7 @@ const UserList = () => {
         hasMore={!isSearch}
         next={() => getMoreUsers(nextPage)}
         loader={<Spinner />}
-        className='grid justify-between gap-4 mt-3 '
+        className='grid justify-between gap-3 mt-3 '
       >
         {userList.map((user, i) => (
           <UserListCard user={user} key={i} />
