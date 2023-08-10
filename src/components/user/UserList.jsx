@@ -42,12 +42,11 @@ const UserList = () => {
 
   const userByName = async (name) => {
     setLoading(true)
-    const { data, error } = await getUsersByName(name)
-    if (data.length === 0) {
+    const { data, error, total_count } = await getUsersByName(name)
+    if (total_count === 0) {
       toast('No se encontraron resultados')
       setIsSearch(false)
       setLoading(false)
-
       return
     }
     if (error) {
@@ -56,13 +55,10 @@ const UserList = () => {
 
       return
     }
-    if (data.length > 0) {
-      setUserList(data)
-      setIsSearch(true)
-      setLoading(false)
-    }
+    setUserList(data)
+    setLoading(false)
   }
-  const [searched, setSearched] = useState('')
+  const [searched, setSearched] = useState(null)
   // Debounce
   const debouncedSearch = useDebounce(searched, 1200)
   useEffect(() => {
@@ -76,14 +72,14 @@ const UserList = () => {
       fetchData()
       return
     }
+    if (debouncedSearch !== null && debouncedSearch !== '') {
+      userByName(debouncedSearch)
 
-    userByName(debouncedSearch)
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch])
 
-  if (loading) {
-    return <Spinner />
-  }
   if (userList.length === 0 && !loading) {
     return (
       <div className='flex flex-col items-center justify-center gap-10'>
@@ -95,26 +91,37 @@ const UserList = () => {
     )
   }
   return (
-    <div className='flex flex-col '>
+    <div className='flex flex-col gap-2 '>
       <Toaster position='top-right' duration={1200} />
-      <input
-        className='w-7/12 px-3 py-1 pl-3 mx-auto mb-3 text-black outline-none rounded-xl '
-        onChange={(e) => setSearched(e.target.value)}
-        type='text'
-        placeholder='Buscar por usuario'
-        value={searched}
-      />
-      <InfiniteScroll
-        dataLength={userList.length}
-        hasMore={!isSearch}
-        next={() => getMoreUsers(nextPage)}
-        loader={<Spinner />}
-        className='grid justify-between gap-3 mt-3 '
-      >
-        {userList.map((user, i) => (
-          <UserListCard user={user} key={i} />
-        ))}
-      </InfiniteScroll>
+      {
+        loading ? <Spinner /> : (
+
+          <>
+            <input
+              className='w-7/12 px-3 py-1 pl-3 mx-auto mb-3 text-black outline-none rounded-xl '
+              onChange={(e) => setSearched(e.target.value)}
+              type='text'
+              placeholder='Buscar por usuario'
+              value={searched}
+
+            />
+            <div>
+
+              <InfiniteScroll
+                dataLength={userList.length}
+                hasMore={!isSearch}
+                next={() => getMoreUsers(nextPage)}
+                loader={<Spinner />}
+                className='flex flex-col justify-between gap-3 p-2 '
+              >
+                {userList.map((user, i) => (
+                  <UserListCard user={user} key={user.id} />
+                ))}
+              </InfiniteScroll>
+            </div>
+          </>
+        )
+      }
     </div>
   )
 }

@@ -51,23 +51,19 @@ export const getUsers = async (since = 0) => {
  */
 export const getUsersByName = async (name) => {
   try {
-    const response = await getAllDataGet(`https://api.github.com/search/users?q=${name}&per_page=15`)
-    const pagination = response.headers.get('link')
-    const nextPageLink = pagination.split(';')[1].slice(0, -1)
-    const indexOfSince = nextPageLink.indexOf('15&page=')
-    const nextPageSince = nextPageLink.substring(indexOfSince + 8)
-    const { items } = await response.json()
+    const response = await getAllDataGet(`https://api.github.com/search/users?q=${name}&per_page=25`)
+
+    const { items, total_count } = await response.json()
     return {
       data: items,
       error: response.statusText,
-      nextPageSince,
+      total_count
     }
 
   } catch (error) {
     return {
       data: [],
       error: true,
-      nextPageSince: 0,
     }
   }
 }
