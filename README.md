@@ -1,6 +1,6 @@
 # Github User/Repositories
 
-## 👉🏻 [Deploy](http://https://github-users-repositories.vercel.app/ 'Deploy')
+## 👉🏻 [Deploy](https://github-users-repositories.vercel.app/'Deploy')
 
 ## 📂[Repositorio](https://github.com/andybaronp/github-users-repositories 'Repositorio')
 
