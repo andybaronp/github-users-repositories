@@ -1,8 +1,7 @@
 # Github User/Repositories
 
-## 👉🏻 [Deploy](https://github-users-repositories.vercel.app/'Deploy')
+## 👉🏻 [Deploy](https://github-users-repositories.vercel.app)
 
-## 📂[Repositorio](https://github.com/andybaronp/github-users-repositories 'Repositorio')
 
 ## 📝 Comenzar
 
