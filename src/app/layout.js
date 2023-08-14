@@ -7,7 +7,6 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'Lista usurios Github',
   description: 'Search repositories on Github ',
-
 }
 export default function RootLayout({ children }) {
   return (
@@ -16,8 +15,11 @@ export default function RootLayout({ children }) {
         <link rel='icon' href='/favicon.png' />
       </head>
       <body className={inter.className}>
+
         <Navbar />
-        <main className='max-w-6xl mx-auto mt-28'>{children}</main>
+        <main className='w-screen max-w-screen-xl mx-auto mt-28'>
+          {children}
+        </main>
       </body>
     </html>
   )

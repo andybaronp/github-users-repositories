@@ -71,7 +71,7 @@ const Repositories = ({ userRepositories }) => {
     )
   }
   return (
-    <div className=''>
+    <div className='flex flex-col justify-center '>
       <Toaster position='top-right' duration={1200} />
       <h3 className='my-4 text-2xl font-semibold text-center'>
         Repositorios Públicos
@@ -81,7 +81,12 @@ const Repositories = ({ userRepositories }) => {
         hasMore={hasMore}
         next={() => setLocalPage((prevePag) => prevePag + 1)}
         loader={<Spinner />}
-        className='flex flex-col justify-between gap-4 mt-3 '
+        className='flex flex-col justify-center gap-4 mt-3 '
+        endMessage={
+          <p className='text-lg text-center text-blue-300'>
+            ¡Sí! Lo has visto todo.
+          </p>
+        }
       >
         {ListRepositories.map((repo, i) => {
           return (

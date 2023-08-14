@@ -91,35 +91,33 @@ const UserList = () => {
     )
   }
   return (
-    <div className='flex flex-col gap-2 '>
+    <div  >
       <Toaster position='top-right' duration={1200} />
       {
         loading ? <Spinner /> : (
 
-          <>
+          <div className='flex flex-col '>
             <input
-              className='w-7/12 px-3 py-1 pl-3 mx-auto mb-3 text-black outline-none rounded-xl '
+              className='w-7/12 max-w-[400px] px-3 py-1 pl-3 mx-auto mb-3 text-black outline-none rounded-xl'
               onChange={(e) => setSearched(e.target.value)}
               type='text'
               placeholder='Buscar por usuario'
               value={searched}
 
             />
-            <div>
 
-              <InfiniteScroll
-                dataLength={userList.length}
-                hasMore={!isSearch}
-                next={() => getMoreUsers(nextPage)}
-                loader={<Spinner />}
-                className='flex flex-col justify-between gap-3 p-2 '
-              >
-                {userList.map((user, i) => (
-                  <UserListCard user={user} key={user.id} />
-                ))}
-              </InfiniteScroll>
-            </div>
-          </>
+            <InfiniteScroll
+              dataLength={userList.length}
+              hasMore={!isSearch}
+              next={() => getMoreUsers(nextPage)}
+              loader={'Loading...'}
+              className='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))]   gap-3  p-3  '
+            >
+              {userList.map((user, i) => (
+                <UserListCard user={user} key={user.id} />
+              ))}
+            </InfiniteScroll>
+          </div>
         )
       }
     </div>

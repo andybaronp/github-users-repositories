@@ -9,7 +9,12 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        'auto-fill-100': 'repeat(auto-fill, minmax(155px, 1fr))',
+        'auto-fit-100': 'repeat(auto-fit, minmax(155px, 1fr))',
+      },
+    },
   },
   plugins: [],
 }
