@@ -5,7 +5,7 @@ import { FaGithub } from 'react-icons/fa6'
 const Navbar = () => {
   return (
     <header className='w-full max-w-screen-xl mx-auto '>
-      <nav className='fixed flex items-center justify-between w-full max-w-screen-xl p-4  bg-[#1e2a47] rounded-sm '>
+      <nav className='fixed flex items-center justify-between w-full max-w-screen-xl p-4  bg-[#1e2a47] rounded-sm z-50	'>
         <Link href='/'>
           <FaGithub size='2rem' />
         </Link>
