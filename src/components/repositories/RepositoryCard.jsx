@@ -92,7 +92,7 @@ const RepositoryCard = ({
         </div>
 
         <button
-          className='flex items-center justify-center gap-2 px-3 py-1 mx-auto text-xs text-gray-300 border border-blue-400 rounded-md w-44 sm:w-64 hover:text-blue-400 hover:border-white rounde sm:text-base backdrop-blur-sm'
+          className='flex items-center justify-center gap-2 px-3 py-1 mx-auto text-xs text-gray-300 border border-blue-400 rounded-md w-44 sm:w-64 hover:text-blue-400 hover:border-white rounde sm:text-base   bg-[#0079ff]/10   	'
           onClick={() => handleFavorite(repo)}
         >
           {' '}

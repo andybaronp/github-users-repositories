@@ -12,7 +12,7 @@ const UserListCard = ({ user }) => {
     <div
       onClick={() => router.push(`/user/${user.login}`)}
       key={user.id}
-      className='bg-[#1e2a47] hover:scale-105  cursor-pointer h-[160px]  flex flex-col  justify-center  gap-2   py-2 px-3 border rounded-xl border-gray-500    sm:w-[320px] w-11/12 mx-auto sm:mx-0   '
+      className='bg-[#1e2a47] hover:scale-105  cursor-pointer h-[160px]  flex flex-col  justify-center  gap-2   py-2 px-3 shadow-md hover:shadow-[#0079ff]/50 rounded-xl border-gray-500    sm:w-[320px] w-11/12 mx-auto sm:mx-0   '
     >
       <div className='flex items-center justify-between gap-2'>
         <Image

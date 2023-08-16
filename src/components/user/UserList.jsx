@@ -111,7 +111,7 @@ const UserList = () => {
               hasMore={!isSearch}
               next={() => getMoreUsers(nextPage)}
               loader={'Loading...'}
-              className='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))]   gap-3  p-3  '
+              className='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] justify-items-center   gap-3  p-3  '
             >
               {userList.map((user, i) => (
                 <UserListCard user={user} key={user.id} />
