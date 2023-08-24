@@ -1,5 +1,5 @@
 
-export const GITHUB_API_BASE_URL = 'https://api.github.com'
+export const GITHUB_API_BASE_URL = 'https://api.github.com/'
 
 /**
  * 
@@ -8,6 +8,7 @@ export const GITHUB_API_BASE_URL = 'https://api.github.com'
  */
 export const getAllDataGet = async (url) => {
   const config = {
+    caches: 'no-cache',
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`
     }

@@ -1,8 +1,11 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, Roboto } from 'next/font/google'
 import Navbar from '@/components/ui/Navbar'
 
-const inter = Inter({ subsets: ['latin'] })
+const fonts = Roboto({
+  weight: ['300', '400', '700'],
+  subsets: ['latin']
+})
 
 export const metadata = {
   title: 'Lista usurios Github',
@@ -14,10 +17,10 @@ export default function RootLayout({ children }) {
       <head>
         <link rel='icon' href='/favicon.png' />
       </head>
-      <body className={inter.className}>
+      <body className={fonts.className}>
 
         <Navbar />
-        <main className='w-screen max-w-screen-xl mx-auto mt-28'>
+        <main className='w-screen max-w-screen-xl mx-auto mt-20'>
           {children}
         </main>
       </body>
