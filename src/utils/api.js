@@ -90,7 +90,7 @@ export const getRepository = async (id, repository) => {
  */
 export const getUserRepositories = async (id, page = 1) => {
   try {
-    const response = await getAllDataGet(`${GITHUB_API_BASE_URL}/users/${id}/repos?per_page=15&page=${page}`, {
+    const response = await getAllDataGet(`${GITHUB_API_BASE_URL}users/${id}/repos?per_page=15&page=${page}`, {
       caches: 'no-cache'
     })
     const pagination = response.headers.get('link')

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { FaArrowLeftLong, } from 'react-icons/fa6'
 
 const getUserByID = async (id) => {
-  const response = await getAllDataGet(`${GITHUB_API_BASE_URL}/users/${id}`)
+  const response = await getAllDataGet(`${GITHUB_API_BASE_URL}users/${id}`)
   const user = await response.json()
   return user
 }
