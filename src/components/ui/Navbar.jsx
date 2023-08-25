@@ -13,7 +13,7 @@ const Navbar = () => {
           <h1 className='hidden text-2xl font-semibold sm:block'>GITHUB USERS</h1>
         </Link>
         <Link href={'/favorites'}>
-          <p color='white'>Repositorios Favoritos</p>
+          <p className='text-base uppercase hover:scale-105'>Repositorios ❤️</p>
         </Link>
       </nav>
     </header>

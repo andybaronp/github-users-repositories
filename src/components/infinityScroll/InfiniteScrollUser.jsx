@@ -1,15 +1,18 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import UserListCard from '../user/UserListCard';
-import { GITHUB_API_BASE_URL, getAllDataGet } from '@/utils/api';
+import { GITHUB_API_BASE_URL, getAllDataGet, getUsersByName } from '@/utils/api';
 import Spinner from '../ui/Spinner';
 import { Toaster, toast } from 'sonner';
+import { useDebounce } from '@/hooks/useDebounce'
 
 const InfiniteScrollUser = () => {
-  const [items, setItems] = useState([]);
+  const [userList, setUserList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1)
+  const [isSearch, setIsSearch] = useState(false)
+
   const fetchData = async () => {
 
     setIsLoading(true);
@@ -24,7 +27,7 @@ const InfiniteScrollUser = () => {
         pageSince = match[1]
       }
       const data = await response.json();
-      setItems(prevItems => [...prevItems, ...data]);
+      setUserList(prevItems => [...prevItems, ...data]);
       setPage(pageSince);
 
 
@@ -44,17 +47,57 @@ const InfiniteScrollUser = () => {
 
   // Scroll
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    if (!isSearch) {
+
+      window.addEventListener('scroll', handleScroll);
+    }
     return () => window.removeEventListener('scroll', handleScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
+  }, [isLoading, isSearch]);
   //Primera carga
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  const [searched, setSearched] = useState()
 
+
+  const userByName = async (name) => {
+    setIsLoading(true)
+    setIsSearch(true)
+    setPage(0)
+    const { data, error, total_count } = await getUsersByName(name)
+    if (total_count === 0) {
+      toast('No se encontraron resultados')
+
+      setIsLoading(false)
+      return
+    }
+    if (error) {
+      toast.error('Error al consultar')
+      setIsLoading(false)
+      return
+    }
+    setUserList(data)
+    setIsLoading(false)
+  }
+  const [searched, setSearched] = useState(undefined)
+  // Debounce
+  const debouncedSearch = useDebounce(searched, 1200)
+  useEffect(() => {
+    if (debouncedSearch === '') {
+      setUserList([])
+      setIsSearch(false)
+      async function reloadData() {
+        await fetchData()
+      }
+      reloadData()
+      return
+    }
+    if (debouncedSearch !== undefined && debouncedSearch !== '') {
+      userByName(debouncedSearch)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearch])
   return (
     <div>
       <Toaster position='top-right' duration={1200} />
@@ -64,17 +107,17 @@ const InfiniteScrollUser = () => {
           onChange={(e) => setSearched(e.target.value)}
           type='text'
           placeholder='Buscar por usuario'
-          value={searched}
+          value={searched || ''}
         />
       </div>
       <div
         className='grid grid-cols-1 gap-3 px-3 py-3 pt-14 sm:px-0 md:grid-cols-3 lg:grid-cols-4 justify-items-center' >
-        {items.map((user, i) => (
+        {userList.map((user, i) => (
           <UserListCard user={user} key={i} />
         ))}
       </div>
       {error && <p>Error: {error.message}</p>}
-      {isLoading && <Spinner items={items} />}
+      {isLoading && <Spinner items={userList} />}
     </div>
   )
 }

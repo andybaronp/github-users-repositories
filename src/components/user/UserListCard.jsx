@@ -24,7 +24,7 @@ const UserListCard = ({ user }) => {
         />
 
       </div>
-      <h3 className='text-lg sm:text-xl basis-3/5'>@{user.login}</h3>
+      <h3 className='text-lg font-semibold sm:text-xl basis-3/5'>@{user.login}</h3>
 
       <div className='flex items-center justify-center gap-1 text-gray-400 cursor-pointer hover:underline'>
         <FaGithub />
