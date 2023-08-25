@@ -1,8 +1,8 @@
 # Github User/Repositories
 
-## 👉🏻 [Deploy](https://github-users-repositories.vercel.app)
+## 👉🏻 [Deploy](https://github-users-repositories.vercel.app){:target="\_blank"}
 
-## ✨ Trabajando en estos 👉🏻 [cambios](https://github-users-repositories-git-feature-grid-layout-andybaronp.vercel.app)
+## ✨ Trabajando en estos 👉🏻 [cambios](https://github-users-repositories-git-feature-grid-layout-andybaronp.vercel.app){:target="\_blank"}
 
 ## 📝 Comenzar
 
