@@ -2,6 +2,7 @@
 
 ## 👉🏻 [Deploy](https://github-users-repositories.vercel.app)
 
+## ✨ Trabajando en estos 👉🏻 [cambios](github-users-repositories-git-feature-grid-layout-andybaronp.vercel.app)
 
 ## 📝 Comenzar
 
@@ -21,6 +22,13 @@
 - Perfil del usuario con sus detalles y repositorios
 - Detalle del repositorio con funcionalidad de guardar favoritos
 - Listado de favoritos con filtro
+
+### Rutas
+
+- **"/"** Inicio
+- **"/user/user_name/"** Detalle del usuario
+- **"/user/user_name/repository/repository_name"** Detalle del reposirotio
+- **"/favorites"** Repositorios favoritos (guardados en localstorage)
 
 ### 📚Depedencias o paquetes usados
 
