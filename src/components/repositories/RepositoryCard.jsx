@@ -59,34 +59,34 @@ const RepositoryCard = ({
         </div>
 
         <div className='text-xs text-gray-300 '>{repo.description}</div>
-        <div className='flex items-center gap-1 text-xs sm:text-sm'>
+        <div className='flex items-center gap-2 text-xs sm:text-base'>
           <FaLanguage /> {repo.language ? repo.language : 'Sin lenguajes'}
         </div>
-        <div className='flex items-center gap-1 text-xs sm:text-sm'>
+        <div className='flex items-center gap-2 text-xs sm:text-base'>
           <FaArrowUpLong /> {formatDate(repo.updated_at)}
         </div>
-        <div className='flex items-center gap-1 overflow-hidden text-xs sm:text-sm'>
+        <div className='flex items-center gap-1 overflow-hidden text-xs sm:text-base'>
           <FaLink /> {repo.html_url}
         </div>
-        <div className='flex items-center gap-1 text-xs'>
+        <div className='flex items-center gap-2 text-xs sm:text-base'>
           <FaHouseChimney /> {repo.homepage ? repo.homepage : 'Sin homepage'}
         </div>
-        <div className='flex items-center gap-1 text-xs sm:text-sm'>
+        <div className='flex items-center gap-2 text-xs sm:text-base'>
           {' '}
           <FaCodeFork />
           {repo.forks}{' '}
         </div>
-        <div className='flex items-center gap-1 text-xs sm:text-sm'>
+        <div className='flex items-center gap-2 text-xs sm:text-base'>
           <FaEye /> {repo.watchers}{' '}
         </div>
         <div
-          className='flex items-center gap-1 overflow-hidden text-xs sm:text-sm hover:underline'
+          className='flex items-center gap-2 overflow-hidden text-xs cursor-copy sm:text-base hover:underline'
           onClick={() => copyTextToClipboard(`git clone ${repo.clone_url}`)}
         >
           {' '}
           <FaRegClone /> {repo.clone_url}{' '}
         </div>
-        <div className='flex items-center gap-1 text-xs sm:text-sm'>
+        <div className='flex items-center gap-2 text-xs sm:text-base'>
           {' '}
           <FaBugSlash /> {repo.open_issues}{' '}
         </div>

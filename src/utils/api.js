@@ -77,11 +77,10 @@ export const getUsersByName = async (name) => {
  * @returns 
  */
 export const getRepository = async (id, repository) => {
-  const response = await getAllDataGet(`${GITHUB_API_BASE_URL}/repos/${id}/${repository}`)
+  const response = await getAllDataGet(`${GITHUB_API_BASE_URL}repos/${id}/${repository}`)
   const repositoryData = await response.json()
   return repositoryData
 }
-
 
 /**
  * 

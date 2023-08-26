@@ -23,7 +23,7 @@ const Repositories = ({ userRepositories }) => {
         userRepositories,
         tonextPage,
       )
-      await getPagination(pagination)
+      // await getPagination(pagination)
       setListRepositories((prev) => prev.concat(repositories))
       if (repositories.length === 0) {
         toast('No se encontraron resultados')
@@ -77,41 +77,35 @@ const Repositories = ({ userRepositories }) => {
         Repositorios Públicos
       </h3>
       <div
-        // dataLength={ListRepositories.length}
-        // hasMore={hasMore}
-        // next={() => setLocalPage((prevePag) => prevePag + 1)}
-        // loader={<Spinner />}
-        className='flex flex-col justify-center gap-4 mt-3 '
-      // endMessage={
-      //   <p className='text-lg text-center text-blue-300'>
-      //     ¡Sí! Lo has visto todo.
-      //   </p>
-      // }
+        className='grid grid-cols-1 gap-4 p-4 pt-20 sm:px-3 sm:grid-cols-3 md:grid-cols-4 justify-items-center'
       >
         {ListRepositories.map((repo, i) => {
           return (
             <div
+              className='bg-[#1e2a47]   border border-gray-500 rounded-xl  w-full  hover:scale-[1.01]  hover:shadow-[#0079ff]/50 '
               key={i}
-              className='bg-[#1e2a47] px-2 py-1 border border-gray-500 rounded-xl  sm:w-[430px] w-11/12 mx-auto sm:mx-0    '
             >
-              {i + 1}
               <Link
                 href={`/user/${repo.owner.login}/repository/${repo.name}`}
-                className='flex flex-col w-full px-4 py-2 mx-auto text-sm '
+                className='flex flex-col w-full p-4 mx-auto text-sm'
               >
                 <div className='flex items-center justify-between mb-1'>
-                  <div className='text-[10] text-blue-400'>{repo.id}</div>
-                  <div className=''>Lenguaje: {repo.language}</div>
+                  {i + 1}
+                  <div className='text-[10]'>ID: <span className='text-blue-400 '>{repo.id}</span></div>
                 </div>
-                <div className='text-[10] sm:text-base capitalize'>
-                  {' '}
-                  {repo.name}{' '}
-                </div>
-                <div className='text-xs text-gray-300 '>
-                  {repo.description ? repo.description : 'Sin descripcion'}
+                <div className='flex flex-col gap-1'>
+                  <div>
+
+                    Nombre: <span className='text-blue-400 '>{repo.name}</span>
+                  </div>
+                  <div className='text-gray-300 truncate '>
+                    Descripción
+                    {repo.description ? repo.description : 'Sin descripcion'}
+                  </div>
+                  <div className=''>Lenguaje: {repo.language ? repo.language : 'No especificado'}</div>
                 </div>
                 <time className='text-xs text-right text-gray-300'>
-                  {formatDate(repo.created_at)}{' '}
+                  Creado:  {formatDate(repo.created_at)}{' '}
                 </time>
               </Link>
             </div>

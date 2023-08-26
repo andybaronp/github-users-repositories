@@ -11,7 +11,6 @@ import { useEffect, useState } from 'react'
 const Repository = ({ repo }) => {
   const [isFavoriteLocal, setisFavoriteLocal] = useState()
   const [loading, setLoading] = useState(true)
-
   const handleFavorite = (repo) => {
     localfavorites.tooggleFavorites(repo)
     const isfavorite = localfavorites.existInFavorites(repo.id)

@@ -5,41 +5,19 @@ import { GITHUB_API_BASE_URL, getAllDataGet, getUsersByName } from '@/utils/api'
 import Spinner from '../ui/Spinner';
 import { Toaster, toast } from 'sonner';
 import { useDebounce } from '@/hooks/useDebounce'
+import { useFetchUser } from '@/hooks/userFetch';
 
 const InfiniteScrollUser = () => {
-  const [userList, setUserList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [page, setPage] = useState(1)
   const [isSearch, setIsSearch] = useState(false)
+  const { fetchData, userList, isLoading, error, setIsLoading, setUserList, setPage } = useFetchUser()
 
-  const fetchData = async () => {
-
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await getAllDataGet(`${GITHUB_API_BASE_URL}users?per_page=15&since=${page}`);
-      const pagination = response.headers.get('link')
-      const pageLink = pagination.split(',')[0]
-      const match = pageLink.match(/since=(\d+)/);
-      let pageSince = 0
-      if (match) {
-        pageSince = match[1]
-      }
-      const data = await response.json();
-      setUserList(prevItems => [...prevItems, ...data]);
-      setPage(pageSince);
-
-
-    } catch (error) {
-      setError(error);
-      toast.error('Error al consultar')
-    } finally {
-      setIsLoading(false);
-    }
-  }
   const handleScroll = () => {
-    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) {
+    const marginOfError = 1;
+    const isScrollAtBottom =
+      Math.abs(
+        window.innerHeight + document.documentElement.scrollTop - document.documentElement.offsetHeight
+      ) <= marginOfError;
+    if (!isScrollAtBottom || isLoading) {
       return;
     }
     fetchData();
@@ -48,17 +26,18 @@ const InfiniteScrollUser = () => {
   // Scroll
   useEffect(() => {
     if (!isSearch) {
-
       window.addEventListener('scroll', handleScroll);
     }
     return () => window.removeEventListener('scroll', handleScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, isSearch]);
+
   //Primera carga
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
 
 
   const userByName = async (name) => {
@@ -99,9 +78,9 @@ const InfiniteScrollUser = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch])
   return (
-    <div>
+    <div className='w-full max-w-screen-xl '>
       <Toaster position='top-right' duration={1200} />
-      <div className='fixed z-40 flex items-center justify-center w-full max-w-screen-xl py-4 backdrop-blur top-16'>
+      <div className='fixed z-40 flex items-center justify-center w-full max-w-screen-xl py-4 backdrop-blur top-16 '>
         <input
           className='  w-[300px] sm:w-[450px] px-3 py-1 pl-3 mx-auto  text-black outline-none rounded-xl'
           onChange={(e) => setSearched(e.target.value)}
@@ -111,15 +90,15 @@ const InfiniteScrollUser = () => {
         />
       </div>
       <div
-        className='grid grid-cols-1 gap-3 px-3 py-3 pt-14 sm:px-0 md:grid-cols-3 lg:grid-cols-4 justify-items-center' >
+        className='grid grid-cols-1 gap-3 p-4 pt-20 sm:px-3 md:grid-cols-3 lg:grid-cols-4 justify-items-center' >
         {userList.map((user, i) => (
           <UserListCard user={user} key={i} />
         ))}
       </div>
-      {error && <p>Error: {error.message}</p>}
+      {error && <p className='py-10 text-2xl text-center text-red-700 '> ¡Ups.  Algo paso! {error.message}</p>}
       {isLoading && <Spinner items={userList} />}
     </div>
   )
 }
 
-export default InfiniteScrollUser 
+export default InfiniteScrollUser
