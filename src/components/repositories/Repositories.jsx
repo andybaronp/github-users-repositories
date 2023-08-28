@@ -10,33 +10,30 @@ import { formatDate } from '@/utils/formatDate'
 const Repositories = ({ userRepositories }) => {
   const [ListRepositories, setListRepositories] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const [localPage, setLocalPage] = useState(0)
   const [lastPage, setLastPage] = useState(0)
   const [tonextPage, settonextPage] = useState(0)
-  const [hasMore, setHasMore] = useState(true)
 
-  //Get the data from the API
-  useEffect(() => {
-    const getRepositories = async () => {
-      setIsLoading(true)
-      const { repositories, pagination, error } = await getUserRepositories(
-        userRepositories,
-        tonextPage,
-      )
-      // await getPagination(pagination)
-      setListRepositories((prev) => prev.concat(repositories))
-      if (repositories.length === 0) {
-        toast('No se encontraron resultados')
-        return
-      }
-      setHasMore(tonextPage < lastPage)
-      setIsLoading(false)
+  const getRepositories = async () => {
+    setIsLoading(true)
+    const { repositories, pagination, error } = await getUserRepositories(
+      userRepositories,
+      tonextPage,
+    )
+    await getPagination(pagination)
+    setListRepositories((prev) => prev.concat(repositories))
+    if (repositories.length === 0) {
+      toast('No se encontraron resultados')
+      return
     }
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+
     getRepositories()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tonextPage])
-
+  }, [])
   const getPagination = async (pagination) => {
     if (pagination === null) {
       return
@@ -63,6 +60,29 @@ const Repositories = ({ userRepositories }) => {
     }
   }
 
+
+  const handleScroll = () => {
+    const marginOfError = 1;
+    const isScrollAtBottom =
+      Math.abs(
+        window.innerHeight + document.documentElement.scrollTop - document.documentElement.offsetHeight
+      ) <= marginOfError;
+    if (!isScrollAtBottom || isLoading) {
+      return;
+    }
+    getRepositories();
+  };
+
+  // Scroll
+  useEffect(() => {
+    if (lastPage > tonextPage) {
+
+      window.addEventListener('scroll', handleScroll);
+    }
+    return () => window.removeEventListener('scroll', handleScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, tonextPage, lastPage]);
+
   if (ListRepositories.length === 0 && !isLoading) {
     return (
       <div className='my-4 text-2xl font-semibold text-center'>
@@ -70,6 +90,7 @@ const Repositories = ({ userRepositories }) => {
       </div>
     )
   }
+
   return (
     <div className='flex flex-col justify-center '>
       <Toaster position='top-right' duration={1200} />
@@ -77,7 +98,7 @@ const Repositories = ({ userRepositories }) => {
         Repositorios Públicos
       </h3>
       <div
-        className='grid grid-cols-1 gap-4 p-4 pt-20 sm:px-3 sm:grid-cols-3 md:grid-cols-4 justify-items-center'
+        className='grid grid-cols-1 gap-4 p-4 pt-20 sm:px-3 sm:grid-cols-3 md:grid-cols-3 justify-items-center'
       >
         {ListRepositories.map((repo, i) => {
           return (
@@ -93,16 +114,18 @@ const Repositories = ({ userRepositories }) => {
                   {i + 1}
                   <div className='text-[10]'>ID: <span className='text-blue-400 '>{repo.id}</span></div>
                 </div>
-                <div className='flex flex-col gap-1'>
-                  <div>
-
-                    Nombre: <span className='text-blue-400 '>{repo.name}</span>
+                <div className='flex flex-col gap-1 text-blue-400 '>
+                  <div className=''>
+                    Nombre: <span className='text-white'>{repo.name}</span>
                   </div>
-                  <div className='text-gray-300 truncate '>
+                  <div className='truncate '>
                     Descripción
-                    {repo.description ? repo.description : 'Sin descripcion'}
+                    <span className='text-white '> {repo.description ? repo.description : 'Sin descripcion'}</span>
                   </div>
-                  <div className=''>Lenguaje: {repo.language ? repo.language : 'No especificado'}</div>
+                  <div className=''>Lenguaje:  <span className='text-white '>
+                    {repo.language ? repo.language : 'No especificado'}
+                  </span>
+                  </div>
                 </div>
                 <time className='text-xs text-right text-gray-300'>
                   Creado:  {formatDate(repo.created_at)}{' '}
@@ -111,8 +134,9 @@ const Repositories = ({ userRepositories }) => {
             </div>
           )
         })}
-      </div>
-    </div>
+        {isLoading && <Spinner items={ListRepositories} />}
+      </div >
+    </div >
   )
 }
 

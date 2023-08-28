@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import UserListCard from '../user/UserListCard';
-import { GITHUB_API_BASE_URL, getAllDataGet, getUsersByName } from '@/utils/api';
+import { getUsersByName } from '@/utils/api';
 import Spinner from '../ui/Spinner';
 import { Toaster, toast } from 'sonner';
 import { useDebounce } from '@/hooks/useDebounce'
@@ -90,7 +90,7 @@ const InfiniteScrollUser = () => {
         />
       </div>
       <div
-        className='grid grid-cols-1 gap-3 p-4 pt-20 sm:px-3 md:grid-cols-3 lg:grid-cols-4 justify-items-center' >
+        className='grid grid-cols-1 gap-3 p-4 pt-24 sm:px-3 md:grid-cols-3 lg:grid-cols-4 justify-items-center' >
         {userList.map((user, i) => (
           <UserListCard user={user} key={i} />
         ))}

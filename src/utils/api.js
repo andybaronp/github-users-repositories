@@ -16,35 +16,6 @@ export const getAllDataGet = async (url) => {
   return fetch(url, config)
 }
 
-
-/**
- * 
- * @param {since} pagina
- * @returns lista de usuarios con la pagina
- */
-export const getUsers = async (since = 0) => {
-  try {
-    const response = await getAllDataGet(`https://api.github.com/users?per_page=15&since=${since}`)
-    const pagination = response.headers.get('link')
-    const nextPageLink = pagination.split(';')[0].slice(0, -1)
-    const indexOfSince = nextPageLink.indexOf('since=')
-    const nextPageSince = nextPageLink.substring(indexOfSince + 6)
-    const data = await response.json()
-    return {
-      data,
-      nextPageSince,
-    }
-
-  } catch (error) {
-    return {
-      data: [],
-      error: true,
-      nextPageSince: 0,
-    }
-  }
-}
-
-
 /**
  * 
  * @param {name} nombre del usuario a buscar
